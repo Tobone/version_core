@@ -5,7 +5,7 @@
 Add this line to your Gemfile:
 
 ```ruby
-gem 'version_core'
+gem 'version_core', git: git: "git@github.com:Tobone/version_core.git"
 ```
 
 Then execute:
@@ -29,7 +29,7 @@ $ rails db:migrate
 Run model generator
 
 ```sh
-$ rails g role_core:model
+$ rails g version_core:model
 ```
 
 ## Stylesheets
@@ -40,8 +40,8 @@ add following code to your application active_admin.scss
 }
 ```
 
-## Mount
-mount gem to your application
+## Router
+mount engine to your host application routes.rb file
 ```
 mount VersionCore::Engine => "/version_core"
 ```
