@@ -1,0 +1,19 @@
+<%= semantic_form_for [:admin, @update_version], html: {id: "pageForm"} do |f| %>
+  <%= f.inputs :name => "版本更新管理" do %>
+    <%= f.input :onlined_at, label: "*生效时间", :as => :datetime_picker, :local => true, :input_html => { :class => 'datePicker'} %>
+    <%= f.input :new_version, label: "*新APP版本号" %>
+    <%= f.input :os_type, label: "*系统类型", as: :select, collection: [["安卓", "android"], ["苹果", "ios"], ["安卓苹果", "all_os"]] %>
+    <%= f.input :content, label:  "*更新说明"%>
+    <%= f.input :android_versions, label: "*安卓更新版本号", as: :check_boxes, collection: VersionCore::VersionList.where(is_show:true).pluck(:number).map { |v| [v, v] }%>
+    <%= f.input :ios_versions, label: "*苹果更新版本号", as: :check_boxes, collection: VersionCore::VersionList.where(is_show:true).pluck(:number).map{ |v| [v, v] }%>
+    <%= f.input :notify_type, label: "*提示类型", as: :select, collection: [["强制更新", "force"], ["提示更新", "suggest"]] %>
+    <% VersionCore::UpdateVersion.stored_attributes[:channels].each do |channel| %>
+      <%= f.input channel, wrapper_html: {  class: "channel" } %>
+    <% end %>
+  <% end %>
+
+  <%= f.actions do %>
+    <%= f.action :submit %>
+    <%= f.action :cancel, as: :link %>
+  <% end %>
+<% end %>
