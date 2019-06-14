@@ -5,7 +5,7 @@
 Add this line to your Gemfile:
 
 ```ruby
-gem 'version_core', git: git: "git@github.com:Tobone/version_core.git"
+gem 'version_core', git: "git@github.com:Tobone/version_core.git"
 ```
 
 Then execute:
