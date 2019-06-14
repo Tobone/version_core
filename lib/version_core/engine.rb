@@ -1,4 +1,3 @@
-require 'pry'
 module VersionCore
   class Engine < ::Rails::Engine
     isolate_namespace VersionCore
