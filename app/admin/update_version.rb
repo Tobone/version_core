@@ -1,7 +1,7 @@
 ActiveAdmin.register UpdateVersion do
   menu priority: 999, label: "版本更新管理", parent: "运营管理"
 
-  permit_params :onlined_at, :new_version, :notify_type, :os_type,
+  permit_params :onlined_at, :percent, :new_version, :notify_type, :os_type,
                 :content, *UpdateVersion.stored_attributes[:channels],
                 android_versions: [], ios_versions: []
 
@@ -21,7 +21,7 @@ ActiveAdmin.register UpdateVersion do
         "所有系统"
       end
     end
-    column "更新说明", :column
+    column "更新说明", :content
     column "安卓提示更新版本号" do |version|
       version.android_versions.join(",")
     end

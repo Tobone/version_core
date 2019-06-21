@@ -4,6 +4,8 @@ module VersionCore::Concerns
       extend ActiveSupport::Concern
 
       included do
+        before_save :set_percent
+        
         store :channels,  accessors: [:ieltsBroServer, :yingyongbao, :ios,
                                       :baidu, :channel_360, :ali, :anzhi,
                                       :huawei, :xiaomi, :oppo, :vivo, :samsung,
@@ -13,6 +15,10 @@ module VersionCore::Concerns
         
         validates *VersionCore::UpdateVersion.stored_attributes[:channels], url: true
         validates :onlined_at, :new_version, :notify_type, :content, presence: true
+      end
+
+      def set_percent
+        self.update_columns(percent: "#{rand(90..98)}%") unless self.percent
       end
     end 
   end

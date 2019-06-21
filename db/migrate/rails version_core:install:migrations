@@ -1,3 +1,0 @@
-rails version_core:install:migrations
-rails db:migrate
-rails g version_core:model
