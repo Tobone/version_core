@@ -24,7 +24,8 @@ class VersionCore::VersionsController < ApplicationController
     "data": {
         "notify_type": "force",
         "content": "123",
-        "channel_url": "http:://www.baidu.com"
+        "channel_url": "http:://www.baidu.com",
+        "new_version": "2.0.0"
     }
   }
   失败{
@@ -39,7 +40,7 @@ class VersionCore::VersionsController < ApplicationController
       return render json: { code: 422, message: "输入的渠道不合法" }
     end
     version = VersionCore::UpdateVersion.where(os_type: [params[:os_type], "all_os"]).where(" ? = ANY(#{params[:os_type]}_versions)", params[:push_version]).where("onlined_at < ?", Time.now).order('created_at asc').last
-    return render json: { code: 0, message: "更新版本", data: version.as_json(only: [:content, :notify_type, :percent]).merge(channel_url: version.send(params[:channel].to_sym))} if version.present?
+    return render json: { code: 0, message: "更新版本", data: version.as_json(only: [:content, :notify_type, :percent, :new_version]).merge(channel_url: version.send(params[:channel].to_sym))} if version.present?
     return render json: { data: nil }
   end
 end
