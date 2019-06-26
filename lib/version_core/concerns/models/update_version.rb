@@ -4,7 +4,7 @@ module VersionCore::Concerns
       extend ActiveSupport::Concern
 
       included do
-        before_save :set_percent
+        after_save :set_percent
         
         store :channels,  accessors: [:ieltsBroServer, :yingyongbao, :ios,
                                       :baidu, :channel_360, :ali, :anzhi,
